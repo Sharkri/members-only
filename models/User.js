@@ -17,8 +17,9 @@ const UserSchema = new mongoose.Schema({
     index: {
       collation: { locale: "en", strength: 2 },
     },
+    maxlength: 25,
   },
-  password: { type: String, required: true },
+  password: { type: String, required: true, minlength: 6 },
   membershipStatus: {
     type: String,
     enum: ["member", "admin", "none"],
