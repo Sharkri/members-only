@@ -1,9 +1,71 @@
 const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
+const User = require("../models/User");
 
 exports.signUpFormGET = asyncHandler(async (req, res, next) => {
-  res.render("sign-up-form", { title: "Sign Up" });
+  res.render("sign-up-form", { title: "Sign Up", errors: {} });
 });
 
-exports.signUpFormPOST = asyncHandler(async (req, res, next) => {
-  res.send("TODO: Implement sign up form post");
-});
+exports.signUpFormPOST = [
+  body("email")
+    .trim()
+    .isEmail()
+    .withMessage("Please enter a valid email")
+    .custom(async (email) => {
+      const emailTaken = await User.exists({ email }).exec();
+      if (emailTaken) return Promise.reject();
+
+      return true;
+    })
+    .withMessage("Email already taken"),
+  body("displayName")
+    .trim()
+    .isString()
+    .isLength({ min: 1 })
+    .withMessage("Display name is required"),
+  body("username")
+    .trim()
+    .isLength({ max: 25 })
+    .withMessage("Username cannot be more than 25 characters")
+    .custom((username) => {
+      // alphanumeric and "_" non-consecutive
+      const pattern = /^(?!.*__)[A-Za-z0-9_]+$/;
+      return pattern.test(username);
+    })
+    .withMessage(
+      "Username can only contain alphanumeric and non-consecutive underscores"
+    )
+    .custom(async (username) => {
+      const usernameTaken = await User.exists({ username }).exec();
+      if (usernameTaken) return Promise.reject();
+      return true;
+    })
+    .withMessage("Username is already taken"),
+  body("password")
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters"),
+  body("confirmPassword")
+    .custom((confirmPass, { req }) => req.body.password === confirmPass)
+    .withMessage("Passwords do not match"),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const { email, username, displayName, password, confirmPassword } =
+      req.body;
+
+    if (!errors.isEmpty()) {
+      res.render("sign-up-form", {
+        title: "Sign Up",
+        email,
+        username,
+        displayName,
+        password,
+        confirmPassword,
+        errors: errors.mapped(),
+      });
+    } else {
+      res.send("TODO: Implement sign up form post");
+    }
+  }),
+];

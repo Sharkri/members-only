@@ -1,17 +1,23 @@
-mixin inputField(labelText)
-  label.flex.flex-col.gap-2
-    strong #{ labelText }
-      = " "
-      if !attributes.required
-        span.text-gray-400.text-sm.font-normal (optional)
-      else
-        span.text-red-600.text-sm.font-normal *
+mixin inputField(labelText, error)
+  div
+    label.flex.flex-col.gap-2
+      strong(class=error ? "text-red-600" : "") #{ labelText }
+        = " "
+        if !attributes.required
+          span.text-gray-400.text-sm.font-normal (optional)
+        else
+          span.text-red-600.text-sm.font-normal *
 
-    if attributes.type == 'textarea'
-      textarea.shadow-sm.border-gray-200.rounded-md(
-        class="focus:ring-opacity-50 focus:ring-sky-200 dark:bg-dark-secondary dark:border-zinc-800 dark:focus:ring-blue-300"
-      )&attributes(attributes)= attributes.value
-    else
-      input.shadow-sm.border-gray-200.rounded-md(
-        class="focus:ring-opacity-50 focus:ring-sky-200 dark:bg-dark-secondary dark:border-zinc-800 dark:focus:ring-blue-300"
-      )&attributes(attributes)
+      if attributes.type == 'textarea'
+        textarea.shadow-sm.border-gray-200.rounded-md(
+          class=`${error ? "border-red-600 focus:ring-red-600 focus:border-red-600" : "focus:ring-opacity-50 focus:ring-sky-200 dark:border-zinc-800 dark:focus:ring-blue-300"} dark:bg-dark-secondary`
+        )&attributes(attributes)= attributes.value
+      else
+        input.shadow-sm.border-gray-200.rounded-md(
+          class=`${error ? "border-red-600 focus:ring-red-600 focus:border-red-600" : "focus:ring-opacity-50 focus:ring-sky-200 dark:border-zinc-800 dark:focus:ring-blue-300"} dark:bg-dark-secondary`
+        )&attributes(attributes)
+
+    if error
+      p.text-sm.pl-2.mt-2.text-red-600
+        i.fa.fa-warning.mr-2(aria-hidden='true')
+        span=error.msg
