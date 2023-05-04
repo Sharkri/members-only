@@ -1,4 +1,15 @@
 extends layout
 
+include mixins/inputField
+
 block content
-  h1.text-xl Sign Up
+  h1.text-2xl.font-bold.mb-7= title
+
+  form.flex.flex-col.gap-6.max-w-sm(action="/sign-up" method="post")
+    +inputField('Email address')(name="email" type="email" placeholder="example@example.com" required)
+    +inputField('Username')(name="username" type="text" maxlength="25" required autocomplete="nickname")
+    +inputField('Display name')(name="displayName" type="text" placeholder="e.g. Jimmy" required)
+    +inputField('Password')(name="password" type="password" placeholder="Must be at least 6 characters" minlength="6" required autocomplete="new-password")
+    +inputField('Confirm Password')(name="confirmPassword" type="password" placeholder="Confirm your password" minlength="6" required autocomplete="new-password")
+
+    button.p-2.bg-blue-500.font-bold.rounded-md(class="text-white/90" type="submit")= title

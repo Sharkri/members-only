@@ -9,6 +9,7 @@
     "watch:css": "npm run build:css -- --watch"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "autoprefixer": "^10.4.14",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
