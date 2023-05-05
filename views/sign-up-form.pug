@@ -4,7 +4,7 @@ include mixins/inputField
 
 block content
   .max-w-sm.mx-auto
-    h1.text-2xl.font-bold.mb-7= title
+    h1.text-2xl.font-bold.mb-3.border-b.pb-4(class="border-b-indigo-500/70")= title
 
     form.flex.flex-col.gap-6.max-w-sm(action="/sign-up" method="post")
       +inputField('Email address', errors.email)(value=email name="email" type="email" placeholder="example@example.com" required)
@@ -14,6 +14,6 @@ block content
       +inputField('Confirm Password', errors.confirmPassword)(value=confirmPassword name="confirmPassword" type="password" placeholder="Confirm your password" minlength="6" required autocomplete="new-password")
 
 
-      button.p-2.bg-blue-500.font-bold.rounded-md(class="text-white/90" type="submit")= title
+      button.p-2.bg-indigo-500.font-bold.rounded-md(class="text-white/90" type="submit")= title
 
-      p.text-center Already have an account? #[a.text-green-600.font-bold(href="/login") Login]   
+      p.text-center Already have an account? #[a.text-indigo-500.font-bold(href="/login") Login]   

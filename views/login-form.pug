@@ -4,7 +4,7 @@ include mixins/inputField
 
 block content
   .max-w-sm.mx-auto
-    h1.text-2xl.font-bold.mb-7= title
+    h1.text-2xl.font-bold.mb-3.border-b.pb-4(class="border-b-indigo-500/70")= title
 
     form.flex.flex-col.gap-6(action="/login" method="post")
       +inputField('Username')(value=username name="username" type="text" maxlength="25" required autocomplete="nickname")
@@ -12,5 +12,5 @@ block content
 
       p.text-red-600=error
 
-      button.p-2.bg-blue-500.font-bold.rounded-md(class="text-white/90" type="submit")= title
-      p.text-center No Account? #[a.text-green-600.font-bold(href="/sign-up") Create One]   
+      button.p-2.bg-indigo-500.font-bold.rounded-md(class="text-white/90" type="submit")= title
+      p.text-center No Account? #[a.text-indigo-500.font-bold(href="/sign-up") Create One]   
