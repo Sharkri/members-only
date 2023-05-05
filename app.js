@@ -11,7 +11,7 @@ const helmet = require("helmet");
 const compression = require("compression");
 const session = require("express-session");
 const passport = require("passport");
-const { LocalStrategy } = require("passport-local");
+const LocalStrategy = require("passport-local").Strategy;
 const RateLimit = require("express-rate-limit");
 
 const limiter = RateLimit({
@@ -72,6 +72,24 @@ passport.use(
     }
   })
 );
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
+
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
 
 app.use(helmet());
 app.use(limiter);
