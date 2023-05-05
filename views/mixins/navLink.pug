@@ -1,0 +1,3 @@
+mixin navLink(text)
+  li
+    a.transition-colors.duration-200.font-bold(class=attributes.href === currentPath ? "text-green-600 border-b border-b-neutral-400 pb-1" : "hover:text-green-600")&attributes(attributes)= text 
