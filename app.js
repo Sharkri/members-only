@@ -56,6 +56,10 @@ passport.use(
         .collation({ locale: "en", strength: 2 })
         .exec();
 
+      if (!user) {
+        return done(null, false, { message: "User does not exist" });
+      }
+
       bcrypt.compare(password, user.password, (err, res) => {
         // error occurred
         if (err) {
