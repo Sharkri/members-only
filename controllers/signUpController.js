@@ -38,10 +38,9 @@ exports.signUpFormPOST = [
       "Username can only contain alphanumeric and non-consecutive underscores"
     )
     .custom(async (username) => {
-      const usernameTaken = await User.exists({ username })
-        .collation({ locale: "en", strength: 2 })
-        .exec();
+      const usernameTaken = await User.isUsernameTaken(username);
       if (usernameTaken) return Promise.reject();
+
       return true;
     })
     .withMessage("Username is already taken"),

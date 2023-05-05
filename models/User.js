@@ -27,4 +27,7 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
+UserSchema.statics.isUsernameTaken = async (username) =>
+  this.exists({ username }).collation({ locale: "en", strength: 2 }).exec();
+
 module.exports = mongoose.model("User", UserSchema);
