@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 
 exports.signUpFormGET = asyncHandler(async (req, res, next) => {
@@ -9,6 +10,7 @@ exports.signUpFormGET = asyncHandler(async (req, res, next) => {
 exports.signUpFormPOST = [
   body("email")
     .trim()
+    .toLowerCase()
     .isEmail()
     .withMessage("Please enter a valid email")
     .custom(async (email) => {
@@ -36,7 +38,9 @@ exports.signUpFormPOST = [
       "Username can only contain alphanumeric and non-consecutive underscores"
     )
     .custom(async (username) => {
-      const usernameTaken = await User.exists({ username }).exec();
+      const usernameTaken = await User.exists({ username })
+        .collation({ locale: "en", strength: 2 })
+        .exec();
       if (usernameTaken) return Promise.reject();
       return true;
     })
@@ -65,7 +69,22 @@ exports.signUpFormPOST = [
         errors: errors.mapped(),
       });
     } else {
-      res.send("TODO: Implement sign up form post");
+      // hash password with bcryptjs
+      const hashedPassword = await new Promise((resolve, reject) => {
+        bcrypt.hash(password, 10, (err, hash) => {
+          if (err) reject(err);
+          else resolve(hash);
+        });
+      });
+
+      const user = new User({
+        email,
+        username,
+        displayName,
+        password: hashedPassword,
+      });
+      await user.save();
+      res.redirect("/");
     }
   }),
 ];
