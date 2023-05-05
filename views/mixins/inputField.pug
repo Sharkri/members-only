@@ -9,13 +9,13 @@ mixin inputField(labelText, error)
           span.text-red-600.text-sm.font-normal *
 
       if attributes.type == 'textarea'
-        textarea.shadow-sm.border-gray-200.rounded-md(
-          class=`${error ? "border-red-600 focus:ring-red-600 focus:border-red-600" : "focus:ring-opacity-50 focus:ring-sky-200 dark:border-zinc-800 dark:focus:ring-blue-300"} dark:bg-dark-secondary`
-        )&attributes(attributes)= attributes.value
+        textarea.shadow-sm.border-gray-200.rounded-md.w-full.pr-7.transition.duration-200(
+          class=`focus:outline-none focus:border-transparent ${error ? "border-red-600 bg-red-50 focus:shadow-[0px_2.5px_5px_2.5px_rgba(239,68,68,0.125)] focus:ring-red-600" : "bg-slate-100 focus:ring-indigo-500 hover:shadow-[0px_0px_3px_#6467f2]"}`
+        )&attributes(attributes)=attributes.value
       else
       .relative
-        input.peer.shadow-sm.border-gray-200.rounded-md.w-full.pr-7(
-          class=`${error ? "border-red-600 focus:ring-red-600 focus:border-red-600" : "focus:ring-opacity-50 focus:ring-sky-200 dark:border-zinc-800 dark:focus:ring-blue-300"} dark:bg-dark-secondary`
+        input.peer.shadow-sm.border-gray-200.rounded-md.w-full.pr-7.transition.duration-200(
+          class=`focus:outline-none focus:border-transparent ${error ? "border-red-600 bg-red-50 focus:shadow-[0px_2.5px_5px_2.5px_rgba(239,68,68,0.125)] focus:ring-red-600" : "bg-slate-100 focus:ring-indigo-500 hover:shadow-[0px_0px_3px_#6467f2]"}`
         )&attributes(attributes)
 
         if (attributes.type == 'password')

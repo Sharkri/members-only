@@ -22,8 +22,6 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.cs
           if !user
             +navLink('Login')(href="/login")
             +navLink('Sign Up')(href="/sign-up")
-
-
           else 
             if user.membershipStatus === 'none'
               a(href="/become-a-member") Become a Member 

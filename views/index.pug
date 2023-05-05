@@ -1,4 +1,5 @@
 extends layout
 
 block content
-  p.text-lg Welcome back, #[strong= user.displayName]
+  if user 
+    p.text-lg Welcome back, #[strong= user.displayName]
