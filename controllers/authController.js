@@ -2,7 +2,21 @@ const asyncHandler = require("express-async-handler");
 const passport = require("passport");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const multer = require("multer");
 const User = require("../models/User");
+
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage,
+  limits: { fileSize: 5242880 }, // 5mb
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith("image/")) {
+      cb(null, true);
+    } else {
+      cb(new Error("File format should be an image"), false);
+    }
+  },
+});
 
 // ---- LOGIN FORM ----
 
@@ -29,6 +43,8 @@ exports.signUpFormGET = asyncHandler(async (req, res, next) => {
 });
 
 exports.signUpFormPOST = [
+  upload.single("profilePicture"),
+
   body("email")
     .trim()
     .toLowerCase()
@@ -102,6 +118,9 @@ exports.signUpFormPOST = [
         username,
         displayName,
         password: hashedPassword,
+        profilePicture: req.file
+          ? { data: req.file.buffer, contentType: req.file.mimetype }
+          : undefined,
       });
       await user.save();
 

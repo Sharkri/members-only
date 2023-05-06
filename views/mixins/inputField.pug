@@ -12,6 +12,8 @@ mixin inputField(labelText, error)
         textarea.shadow-sm.border-gray-200.rounded-md.w-full.pr-7.transition.duration-200(
           class=`focus:outline-none focus:border-transparent ${error ? "border-red-600 bg-red-50 focus:shadow-[0px_2.5px_5px_2.5px_rgba(239,68,68,0.125)] focus:ring-red-600" : "bg-slate-100 focus:ring-indigo-500 hover:shadow-[0px_0px_3px_#6467f2]"}`
         )&attributes(attributes)=attributes.value
+      else if attributes.type == 'file'
+        input.text-sm(class=error ? "border-red-600" : "")&attributes(attributes)
       else
         .relative
           input.peer.shadow-sm.border-gray-200.rounded-md.w-full.pr-7.transition.duration-200(

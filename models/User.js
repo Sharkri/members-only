@@ -25,6 +25,10 @@ const UserSchema = new mongoose.Schema({
     enum: ["member", "admin", "none"],
     default: "none",
   },
+  profilePicture: {
+    data: Buffer,
+    contentType: String,
+  },
 });
 
 UserSchema.statics.isUsernameTaken = async function isUsernameTaken(username) {
@@ -32,5 +36,13 @@ UserSchema.statics.isUsernameTaken = async function isUsernameTaken(username) {
     .collation({ locale: "en", strength: 2 })
     .exec();
 };
+
+UserSchema.virtual("pfpUrl").get(function getImageUrl() {
+  if (!this.profilePicture.data) return "";
+
+  return `data:${
+    this.profilePicture.contentType
+  };base64,${this.profilePicture.data.toString("base64")}`;
+});
 
 module.exports = mongoose.model("User", UserSchema);

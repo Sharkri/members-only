@@ -3,6 +3,8 @@ extends layout
 block content
   article.max-w-5xl.h-full.mx-auto.flex.flex-col
     header.my-5
+      img.w-8.h-8.rounded-full(src=message.author.pfpUrl || '/images/default-pfp.png' alt="")
+
       p
         | Post by #[span.text-indigo-500 #{message.author.displayName} (@#{message.author.username})]
         | · 

@@ -30,7 +30,7 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.cs
 
             .relative
               button#open-user-dropdown.flex.items-center
-                img.w-7.h-7.rounded-full(src=user.pfp || '/images/default-pfp.png' alt="")
+                img.w-7.h-7.rounded-full(src=user.pfpUrl || '/images/default-pfp.png' alt="")
                 span(class="text-[9px] text-neutral-500")
                   i.fa.fa-chevron-down.ml-2.thin-icon(aria-hidden='true')
               ul#user-dropdown.text-neutral-500.py-4.text-sm.absolute.hidden.right-0.shadow-xl.rounded.w-52.flex.flex-col.bg-neutral-50
