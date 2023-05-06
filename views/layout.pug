@@ -1,6 +1,6 @@
 
 doctype html
-html
+html.h-full
   head
     title= title
     link(rel='stylesheet' href='/stylesheets/output.css')
@@ -13,7 +13,7 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.cs
 
   include mixins/navLink.pug
 
-  body(class="text-black/90 bg-neutral-50")
+  body.h-full.flex.flex-col(class="text-black/90 bg-neutral-50")
     header.z-10.sticky.top-0.px-6.py-3.flex.justify-between.flex-wrap.gap-3.bg-neutral-50.border-b.border-b-slate-200
       a(href="/") Members Only
 
@@ -37,7 +37,7 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.cs
                 p.px-4.py-2 Membership Status: #[strong.capitalize.text-indigo-500=user.membershipStatus]
                 a.px-4.py-2(href="/log-out" class="transition-colors duration-200 hover:text-black/90") Log out
 
-    .py-5.px-7.max-w-7xl.mx-auto
+    .py-5.px-7.max-w-7xl.grow
       block content
 
     script(src="/scripts/index.js" type="text/javascript") 
