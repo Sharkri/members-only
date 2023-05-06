@@ -2,7 +2,7 @@ const express = require("express");
 const {
   signUpFormGET,
   signUpFormPOST,
-} = require("../controllers/signUpController");
+} = require("../controllers/authController");
 
 const router = express.Router();
 
