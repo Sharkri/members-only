@@ -23,6 +23,7 @@ const limiter = RateLimit({
 const indexRouter = require("./routes/index");
 const signUpRouter = require("./routes/signUp");
 const loginRouter = require("./routes/login");
+const logoutRouter = require("./routes/logout");
 
 const User = require("./models/User");
 
@@ -111,6 +112,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/login", loginRouter);
+app.use("/log-out", logoutRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
