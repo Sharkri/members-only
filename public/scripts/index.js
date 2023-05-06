@@ -15,6 +15,9 @@ togglePassVisibility.forEach((btn) => {
 const openUserDropdown = document.getElementById("open-user-dropdown");
 const userDropdown = document.getElementById("user-dropdown");
 
-openUserDropdown.addEventListener("click", () => {
-  userDropdown.classList.toggle("hidden");
-});
+// will only not be null when user is logged in
+if (openUserDropdown) {
+  openUserDropdown.addEventListener("click", () => {
+    userDropdown.classList.toggle("hidden");
+  });
+}
