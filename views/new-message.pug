@@ -7,9 +7,9 @@ block content
     .max-w-sm.mx-auto
       h1.text-2xl.font-bold.mb-3.border-b.pb-4(class="border-b-indigo-500/70")= title
 
-      form.flex.flex-col.gap-6(action="/login" method="post")
-        +inputField('Title')(value=message.title name="title" type="text" placeholder="Enter a title" required)
-        +inputField('Message Text')(value=message.text name="text" type="textarea" placeholder="Enter a message" required)
+      form.flex.flex-col.gap-6(action="/new-message" method="post")
+        +inputField('Title', errors.title)(value=message.title name="title" type="text" placeholder="Enter a title" required)
+        +inputField('Message Text', errors.text)(value=message.text name="text" type="textarea" placeholder="Enter a message" required)
 
         p.text-red-600=error
 
