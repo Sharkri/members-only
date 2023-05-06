@@ -7,3 +7,6 @@ block content
         i.fa.fa-plus(aria-hidden='true')
         | New message  
       p.text-lg Welcome back, #[strong= user.displayName]
+
+  each message in messages 
+    p=message.text
