@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  article.max-w-5xl.h-full.mx-auto.flex.flex-col
+    header.my-5
+      p
+        | Post by #[span.text-indigo-500 #{message.author.displayName} (@#{message.author.username})]
+        | · 
+        span.text-gray-400 #{message.formattedDate}
+
+    h1.text-3xl.font-bold.mb-4=message.title
+    p.font-serif.text-lg= message.text
+

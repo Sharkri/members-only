@@ -4,7 +4,7 @@ block content
   main.max-w-5xl.h-full.mx-auto.flex.flex-col
     if user
       div
-        a.font-bold.inline-flex.items-center.gap-2.bg-indigo-500.text-white.py-2.px-3.rounded-md(href="/new-message")
+        a.font-bold.inline-flex.items-center.gap-2.bg-indigo-500.text-white.py-2.px-3.rounded-md(href="/message/new")
           i.fa.fa-plus(aria-hidden='true')
           | New message  
         p.text-lg Welcome back, #[strong= user.displayName]
@@ -16,12 +16,16 @@ block content
 
     .bg-neutral-100.grow
       each message in messages
-        .p-4.bg-neutral-200.flex.justify-between
-          h1.text-lg.text-indigo-500=message.title
+        .p-4.bg-neutral-200.flex
+          a.text-lg.text-indigo-500.transition.duration-200.grow(href="/message/" + message.id class="hover:text-indigo-700")=message.title
           .text-sm
             if user && user.membershipStatus !== 'none'
               p(title=message.createdAt)=message.formattedDate
-              p by #{message.author.displayName} (@#{message.author.username})
+
+              if user.id === message.author.id 
+                p by #[span.text-indigo-500 You]
+              else 
+                p by #[span.text-indigo-500 #{message.author.displayName} (@#{message.author.username})]
             else
               p Date: █████
               p Post by: ██████

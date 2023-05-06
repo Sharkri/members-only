@@ -2,6 +2,23 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const Message = require("../models/Message");
 
+exports.messagePage = asyncHandler(async (req, res, next) => {
+  const message = await Message.findById(req.params.id)
+    .populate("author")
+    .exec();
+
+  if (!message) {
+    const err = new Error("Message post not found");
+    err.status = 404;
+    next(err);
+  } else {
+    res.render("message-post", {
+      title: message.title,
+      message,
+    });
+  }
+});
+
 exports.newMessageGET = asyncHandler(async (req, res, next) => {
   if (!req.user) {
     res.redirect("/login");
