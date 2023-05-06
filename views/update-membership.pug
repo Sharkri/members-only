@@ -1,0 +1,13 @@
+extends layout
+
+include mixins/inputField
+
+block content
+  .max-w-sm.mx-auto
+    h1.text-2xl.font-bold.mb-2= title
+    p.text-sm.text-gray-400.border-b.pb-3.mb-4(class="border-b-indigo-500/50")=description
+
+    form.flex.flex-col.gap-6.max-w-sm(action="" method="post")
+      +inputField('Enter secret passcode', errors && errors.password)(value=password name="password" type="password" required)
+
+      button.p-2.bg-indigo-500.font-bold.rounded-md(class="text-white/90" type="submit")= title

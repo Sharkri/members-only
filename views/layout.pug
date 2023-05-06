@@ -24,9 +24,9 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.cs
             +navLink('Sign Up')(href="/sign-up")
           else 
             if user.membershipStatus === 'none'
-              a(href="/become-a-member") Become a Member 
+              a(href="/user/become-a-member") Become a Member 
             else if (user.memberStatus === 'member')
-              a(href="/become-an-admin")
+              a(href="/user/become-a-member")
 
             .relative
               button#open-user-dropdown.flex.items-center
