@@ -8,11 +8,20 @@ block content
           i.fa.fa-plus(aria-hidden='true')
           | New message  
         p.text-lg Welcome back, #[strong= user.displayName]
+
+    h1.text-3xl.border-b.pb-2.mb-2.font-bold Member Posts
+
+    if !user || user.membershipStatus === 'none'
+      p.mb-2.text-center.text-gray-400 Note: You must be a member to view the post's author and date of creation.
+
     .bg-neutral-100.grow
       each message in messages
-        .p-4.bg-neutral-200.flex
+        .p-4.bg-neutral-200.flex.justify-between
           h1.text-lg.text-indigo-500=message.title
-          p(title=message.createdAt)=message.formattedDate
-
-
-
+          .text-sm
+            if user && user.membershipStatus !== 'none'
+              p(title=message.createdAt)=message.formattedDate
+              p by #{message.author.displayName} (@#{message.author.username})
+            else
+              p Date: █████
+              p Post by: ██████
