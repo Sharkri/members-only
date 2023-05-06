@@ -11,3 +11,10 @@ togglePassVisibility.forEach((btn) => {
     icon.classList.toggle("fa-eye-slash");
   });
 });
+
+const openUserDropdown = document.getElementById("open-user-dropdown");
+const userDropdown = document.getElementById("user-dropdown");
+
+openUserDropdown.addEventListener("click", () => {
+  userDropdown.classList.toggle("hidden");
+});
