@@ -25,8 +25,8 @@ href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.cs
           else 
             if user.membershipStatus === 'none'
               a(href="/user/become-a-member") Become a Member 
-            else if (user.memberStatus === 'member')
-              a(href="/user/become-a-member")
+            else if (user.membershipStatus === 'member')
+              a(href="/user/become-an-admin") Become an Admin
 
             .relative
               button#open-user-dropdown.flex.items-center
