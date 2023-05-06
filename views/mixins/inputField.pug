@@ -18,9 +18,9 @@ mixin inputField(labelText, error)
             class=`focus:outline-none focus:border-transparent ${error ? "border-red-600 bg-red-50 focus:shadow-[0px_2.5px_5px_2.5px_rgba(239,68,68,0.125)] focus:ring-red-600" : "bg-slate-100 focus:ring-indigo-500 hover:shadow-[0px_0px_3px_#6467f2]"}`
           )&attributes(attributes)
 
-        if (attributes.type == 'password')
-          button.absolute.right-1.z-10.mt-2.p-1.text-sm.toggle-pass-visible(type="button" class="transition duration-200 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 focus:opacity-100")
-            i.fa.fa-eye(aria-hidden='true')
+          if (attributes.type == 'password')
+            button.absolute.right-1.z-10.mt-2.p-1.text-sm.toggle-pass-visible(type="button" class="transition duration-200 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 focus:opacity-100")
+              i.fa.fa-eye(aria-hidden='true')
 
     if error
       p.text-sm.pl-2.mt-2.text-red-600
