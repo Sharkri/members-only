@@ -1,5 +1,9 @@
 extends layout
 
 block content
-  if user 
-    p.text-lg Welcome back, #[strong= user.displayName]
+  if user
+    div
+      a.font-bold.inline-flex.items-center.gap-2.bg-indigo-500.text-white.py-2.px-3.rounded-md(href="/new-message")
+        i.fa.fa-plus(aria-hidden='true')
+        | New message  
+      p.text-lg Welcome back, #[strong= user.displayName]
