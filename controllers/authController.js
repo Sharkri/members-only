@@ -45,18 +45,6 @@ exports.signUpFormGET = asyncHandler(async (req, res, next) => {
 exports.signUpFormPOST = [
   upload.single("profilePicture"),
 
-  body("email")
-    .trim()
-    .toLowerCase()
-    .isEmail()
-    .withMessage("Please enter a valid email")
-    .custom(async (email) => {
-      const emailTaken = await User.exists({ email }).exec();
-      if (emailTaken) return Promise.reject();
-
-      return true;
-    })
-    .withMessage("Email already taken"),
   body("displayName")
     .trim()
     .isString()
@@ -91,13 +79,11 @@ exports.signUpFormPOST = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
 
-    const { email, username, displayName, password, confirmPassword } =
-      req.body;
+    const { username, displayName, password, confirmPassword } = req.body;
 
     if (!errors.isEmpty()) {
       res.render("sign-up-form", {
         title: "Sign Up",
-        email,
         username,
         displayName,
         password,
@@ -114,7 +100,6 @@ exports.signUpFormPOST = [
       });
 
       const user = new User({
-        email,
         username,
         displayName,
         password: hashedPassword,
