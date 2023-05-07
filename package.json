@@ -2,6 +2,9 @@
   "name": "members-only",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": ">=16.6.1"
+  },
   "scripts": {
     "start": "npm run build:css && node ./bin/www",
     "dev": "DEBUG=members-only:* nodemon npm run start",
