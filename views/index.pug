@@ -20,7 +20,7 @@ block content
           each message in messages
             tr.bg-neutral-200
               td.pl-4.py-4
-                a.text-indigo-500.transition.duration-200.grow(class="md:text-lg" href="/message/" + message.id class="hover:text-indigo-700")=message.title
+                a.text-indigo-500.transition.duration-200.grow(class="md:text-lg" href=message.url class="hover:text-indigo-700")=message.title
 
               td.pr-4.py-4
                 .text-sm
@@ -34,3 +34,6 @@ block content
                   else
                     p Date: █████
                     p Post by: ██████
+
+                if user && user.membershipStatus === 'admin'
+                  a.pt-3.text-red-600(href=message.url + '/delete') Delete

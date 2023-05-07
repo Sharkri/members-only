@@ -73,3 +73,23 @@ exports.newMessagePOST = [
     }
   }),
 ];
+
+exports.deleteMessageGET = asyncHandler(async (req, res, next) => {
+  if (req.user?.membershipStatus !== "admin") {
+    res.redirect("/user/become-an-admin");
+  } else {
+    const message = await Message.findById(req.params.id, "title").exec();
+    res.render("delete-message", { title: "Delete Message", message });
+  }
+});
+
+exports.deleteMessagePOST = asyncHandler(async (req, res, next) => {
+  if (req.user?.membershipStatus !== "admin") {
+    const err = new Error("Unauthorized");
+    err.status = 401;
+    next(err);
+  } else {
+    await Message.findByIdAndRemove(req.params.id);
+    res.redirect("/");
+  }
+});

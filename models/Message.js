@@ -26,4 +26,8 @@ MessageSchema.virtual("formattedDate").get(function getFormattedDate() {
   return format(date, `MMM d${isThisYear(date) ? "" : ", yyyy"}`);
 });
 
+MessageSchema.virtual("url").get(function getUrl() {
+  return `/message/${this.id}`;
+});
+
 module.exports = mongoose.model("Message", MessageSchema);

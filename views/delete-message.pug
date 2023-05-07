@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  .max-w-sm.mx-auto
+    h1.text-2xl.font-bold.mb-3.pb-4= title
+
+    form.flex.flex-col.gap-6(action="" method="post")
+      .flex.items-center.gap-2
+        i.text-red-700.fa.fa-warning(aria-hidden='true')
+        p Are you sure you want to delete #[a.font-bold.text-indigo-500.underline(target="_blank" rel="noreferrer" href=message.url)= message.title]?
+      button.p-2.bg-indigo-500.font-bold.rounded-md(class="text-white/90" type="submit")= title
