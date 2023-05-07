@@ -10,7 +10,7 @@ block content
       p
         | Post by #[span.text-indigo-500=isMember ? `${message.author.displayName} (@${message.author.username})` : "█████"]
         if isMember
-          span.text-gray-400 · #{message.formattedDate}
+          span.text-gray-400  · #{message.formattedDate}
 
     h1.text-3xl.font-bold.mb-4=message.title
     p.font-serif.text-lg= message.text
