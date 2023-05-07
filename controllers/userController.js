@@ -4,7 +4,7 @@ const details = {
   member: {
     title: "Become a Member",
     description:
-      "By becoming a member, you will be able to post messages and see the author and date of each message.",
+      "By becoming a member, you will be able to post messages and see the author and date of each message. (See the passcode at https://github.com/Sharkri/members-only)",
   },
 
   admin: {
