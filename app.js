@@ -98,6 +98,7 @@ passport.deserializeUser(async (id, done) => {
 
 app.use((req, res, next) => {
   res.locals.user = req.user;
+  res.locals.isMember = req.user && req.user.membershipStatus !== "none";
   res.locals.currentPath = req.path;
   next();
 });

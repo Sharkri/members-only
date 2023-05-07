@@ -11,7 +11,7 @@ block content
 
     h1.text-3xl.border-b.pb-2.mb-2.font-bold Member Posts
 
-    if !user || user.membershipStatus === 'none'
+    if !isMember
       p.mb-2.text-center.text-gray-400 Note: You must be a member to view the post's author and date of creation.
 
     .bg-neutral-100.grow
