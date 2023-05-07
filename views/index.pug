@@ -4,21 +4,22 @@ block content
   main.max-w-5xl.h-full.mx-auto.flex.flex-col
     if user
       div
-        a.font-bold.inline-flex.items-center.gap-2.bg-indigo-500.text-white.py-2.px-3.rounded-md(href="/message/new")
-          i.fa.fa-plus(aria-hidden='true')
-          | New message  
-        p.text-lg Welcome back, #[strong= user.displayName]
+        h1.text-xl.mb-4 Welcome back, #[strong= user.displayName]
 
-    h1.text-3xl.border-b.pb-2.mb-2.font-bold Member Posts
+        a.font-bold.inline-flex.items-center.gap-2.bg-indigo-500.text-white.py-2.px-3.rounded-md(href="/message/new") #[i.fa.fa-plus(aria-hidden='true')] New message
+
+
+    h1.text-3xl.border-b.py-3.my-4.font-bold Member Posts
 
     if !isMember
       p.mb-2.text-center.text-gray-400 Note: You must be a member to view the post's author and date of creation.
+
 
     .bg-neutral-100.grow
       table.w-full
         tbody
           each message in messages
-            tr.bg-neutral-200
+            tr.bg-neutral-200(class="even:bg-neutral-300")
               td.pl-4.py-4
                 a.text-indigo-500.transition.duration-200.grow(class="md:text-lg" href=message.url class="hover:text-indigo-700")=message.title
 

@@ -17,7 +17,7 @@ const RateLimit = require("express-rate-limit");
 
 const limiter = RateLimit({
   windowMs: 60 * 1000, // 1 minute
-  max: 50,
+  max: 100,
 });
 
 const indexRouter = require("./routes/index");
