@@ -15,17 +15,22 @@ block content
       p.mb-2.text-center.text-gray-400 Note: You must be a member to view the post's author and date of creation.
 
     .bg-neutral-100.grow
-      each message in messages
-        .p-4.bg-neutral-200.flex
-          a.text-lg.text-indigo-500.transition.duration-200.grow(href="/message/" + message.id class="hover:text-indigo-700")=message.title
-          .text-sm
-            if user && user.membershipStatus !== 'none'
-              p(title=message.createdAt)=message.formattedDate
+      table.w-full
+        tbody
+          each message in messages
+            tr.bg-neutral-200
+              td.pl-4.py-4
+                a.text-lg.text-indigo-500.transition.duration-200.grow(href="/message/" + message.id class="hover:text-indigo-700")=message.title
 
-              if user.id === message.author.id 
-                p by #[span.text-indigo-500 You]
-              else 
-                p by #[span.text-indigo-500 #{message.author.displayName} (@#{message.author.username})]
-            else
-              p Date: █████
-              p Post by: ██████
+              td.pr-4.py-4
+                .text-sm
+                  if user && user.membershipStatus !== 'none'
+                    p(title=message.createdAt)=message.formattedDate
+
+                    if user.id === message.author.id 
+                      p by #[span.text-indigo-500 You]
+                    else 
+                      p by #[span.text-indigo-500 #{message.author.displayName} (@#{message.author.username})]
+                  else
+                    p Date: █████
+                    p Post by: ██████
